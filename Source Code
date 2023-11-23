@@ -864,6 +864,8 @@ saladMenu:
         goto saladMenu;
     }
 }
+
+
 int main()
 {
     int b;
@@ -874,78 +876,66 @@ int main()
          << endl;
 
     cout << "  Please enter your name: ";
-    gets(name);
+    
+    fgets(name, sizeof(name), stdin);
+   
+    name[strcspn(name, "\n")] = '\0';
 
-b:
-    cout << "\n\n  Hello Customer! " << name << "." << "\n  What do you like to order?\n\n";
-correct:
-    cout << "\n\t\t\t\t\t  *----------MENU----------*\n"
-         << endl;
-    cout << "Press '1' BURGER" << endl;
-    cout << "Press '2' PARATHA ROLLS" << endl;
-    cout << "Press '3' SHAWARMA" << endl;
-    cout << "Press '4' BIRYANI" << endl;
-    cout << "Press '5' PIZZA" << endl;
-    cout << "Press '6' SALAD" << endl;
-
-    cout << "\nPlease enter your choice: ";
-    ch = getch();
-    a = ch;
-    cout << endl;
-
-    if (a >= 49 && a <= 54)
+    while (true)
     {
-        switch (a)
+        cout << "\n\n  Hello, " << name << "!" << "\n  What would you like to order?\n\n";
+
+        cout << "\n\t\t\t\t\t  *----------MENU----------*\n"
+             << endl;
+        cout << "Press '1' BURGER" << endl;
+        cout << "Press '2' PARATHA ROLLS" << endl;
+        cout << "Press '3' SHAWARMA" << endl;
+        cout << "Press '4' BIRYANI" << endl;
+        cout << "Press '5' PIZZA" << endl;
+        cout << "Press '6' SALAD" << endl;
+
+        cout << "\nPlease enter your choice: ";
+        ch = getch();
+        a = ch;
+        cout << endl;
+
+        if (a >= 49 && a <= 54)
         {
-        case 49:
+            switch (a)
+            {
+            case 49:
+                b = burger();
+                break;
+            case 50:
+                b = paratha();
+                break;
+            case 51:
+                b = shawarma();
+                break;
+            case 52:
+                b = biryani();
+                break;
+            case 53:
+                b = pizza();
+                break;
+            case 54:
+                b = salad();
+                break;
+            }
+
+            if (b == 8)
+            {
+                system("cls");
+                continue;
+            }
+        }
+        else
         {
-            b = burger();
-            goto b;
-            break;
+            system("cls");
+            cout << "\n\t\t\t\tInvalid Input..!!! Please Enter value between 1 to 6\n";
         }
-        case 50:
-        {
-            b = paratha();
-            goto b;
-            break;
-        }
-        case 51:
-        {
-            b = shawarma();
-            goto b;
-            break;
-        }
-        case 52:
-        {
-            b = biryani();
-            goto b;
-            break;
-        }
-        case 53:
-        {
-            b = pizza();
-            goto b;
-            break;
-        }
-        case 54:
-        {
-            b = salad();
-            goto b;
-            break;
-        }
-        }
-    }
-    else
-    {
-        system("cls");
-        cout << "\n\t\t\t\tInvalid Input- Please Enter value between 1 to 6\n";
-        goto b;
     }
 
     getch();
     return 0;
 }
-
-
-
-
